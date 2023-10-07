@@ -17,22 +17,23 @@ const PORT = process.env.PORT || 5000;
 app.post('/api/user-qrcode', async (req, res) => {
     try {
 
-        const { ipVersion,
+        const { text, ipVersion,
             ipAddress, latitude, longitude, countryName, countryCode,
             timeZone, zipCode, cityName, regionName, continent } = req.body;
 
-        if (!ipVersion ||
+        if (!text || !ipVersion ||
             !ipAddress || !latitude || !longitude || !countryName || !countryCode ||
             !timeZone || !zipCode || !cityName || !regionName || !continent) {
             // Respond with a 400 Bad Request status and an error message
             res.status(400).json({ message: "Fill all fields" });
         }
         const NewUser = await User.create({
-            ipVersion, ipAddress, latitude, longitude, countryName,
+            text ,ipVersion, ipAddress, latitude, longitude, countryName,
             countryCode, timeZone, zipCode, cityName, regionName, continent
         });
 
         console.log("User data stored");
+        console.log(NewUser);
         res.status(201).json({ message: "Data stored successfully!" });
 
     } catch (err) {

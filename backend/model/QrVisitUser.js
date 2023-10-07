@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
+    text:{type : String},
     ipVersion: { type: String },
     ipAddress: { type: String },
     latitude: { type: Number },
